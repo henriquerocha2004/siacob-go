@@ -1,0 +1,22 @@
+version: '2'
+services:
+  blogapi:
+    container_name: siacob_go_api
+    build: .
+    ports:
+      - "7000:80"
+    volumes:
+      - "../:/app"
+    shm_size: '2gb'
+    extra_hosts:
+       - "host.docker.internal:host-gateway"
+  siacob_go_db:
+    image: mysql:8
+    container_name: siacob_go_db
+    ports:
+      - "7001:3306"
+    volumes:
+      - "/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=siacob         
